@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>校园开放日 AI 实践工作坊 · 报名</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="masthead">
+        <p class="eyebrow">open-day-ai-2026</p>
+        <h1>校园开放日<br><span>AI 实践工作坊</span></h1>
+        <div class="event-meta">
+          <span>2026-11-07</span>
+          <span>100 个名额</span>
+          <span>以 student_id 识别</span>
+        </div>
+      </header>
+
+      <section class="panel" aria-labelledby="form-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">报名登记</p>
+            <h2 id="form-title">留下你的参与信息</h2>
+          </div>
+          <div class="remaining" aria-live="polite">
+            <span>剩余名额</span>
+            <strong id="remaining">—</strong>
+          </div>
+        </div>
+
+        <form id="registration-form" novalidate>
+          <label for="student-id">学生标识 student_id</label>
+          <input id="student-id" name="student_id" type="text" autocomplete="off" spellcheck="false" placeholder="例如 S20260001" required>
+          <p class="hint">保留平台提供的原始值；首尾有空白会被拒绝，内部空白不额外限制。</p>
+
+          <label for="name">展示姓名</label>
+          <input id="name" name="name" type="text" autocomplete="name" placeholder="例如 林同学" required>
+          <p class="hint">姓名仅用于页面与确认展示，不作为身份或去重依据。</p>
+
+          <div class="actions">
+            <button id="submit-button" type="submit">提交报名</button>
+            <button id="query-button" class="secondary" type="button">刷新查询</button>
+          </div>
+        </form>
+
+        <p class="sample-note">可使用课程虚构样本：S20260001 / 林同学，S20260002 / 林同学，S20260003 / 陈同学。</p>
+      </section>
+
+      <section id="result" class="result idle" aria-live="polite" aria-atomic="true">
+        <p class="eyebrow">服务端结果</p>
+        <h2 id="result-title">等待提交</h2>
+        <p id="result-message">成功提示只会在服务端确认报名后出现；剩余名额也以服务端返回为准。</p>
+        <dl class="result-detail">
+          <div><dt>报名姓名</dt><dd id="result-name">—</dd></div>
+          <div><dt>剩余名额</dt><dd id="result-remaining">—</dd></div>
+        </dl>
+      </section>
+
+      <footer>
+        <p>本地课程原型 · 不采集手机号、身份证号或住址 · 不接入真实学校账户</p>
+        <p id="network-status" class="network-status">服务端连接待确认</p>
+      </footer>
+    </main>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

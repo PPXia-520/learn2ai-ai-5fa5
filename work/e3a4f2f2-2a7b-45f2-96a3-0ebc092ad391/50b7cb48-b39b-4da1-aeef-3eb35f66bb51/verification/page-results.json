@@ -1,0 +1,84 @@
+{
+  "generated_at": "2026-10-21T11:36:42+0800",
+  "passed": 13,
+  "failed": 0,
+  "results": [
+    {
+      "test": "index served",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "type": "text/html; charset=utf-8"
+      }
+    },
+    {
+      "test": "form fields present",
+      "pass": true,
+      "detail": "student-id/name"
+    },
+    {
+      "test": "query control present",
+      "pass": true,
+      "detail": "query-button"
+    },
+    {
+      "test": "server remaining label present",
+      "pass": true,
+      "detail": "remaining"
+    },
+    {
+      "test": "no contact inputs",
+      "pass": true,
+      "detail": "no phone/id_card"
+    },
+    {
+      "test": "stylesheet served",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "type": "text/css; charset=utf-8"
+      }
+    },
+    {
+      "test": "javascript served",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "type": "text/javascript; charset=utf-8"
+      }
+    },
+    {
+      "test": "success only on server registered result",
+      "pass": true,
+      "detail": "registered branch"
+    },
+    {
+      "test": "duplicate and full branches",
+      "pass": true,
+      "detail": "business branches"
+    },
+    {
+      "test": "timeout unknown message",
+      "pass": true,
+      "detail": "unknown message"
+    },
+    {
+      "test": "query uses encoded student id",
+      "pass": true,
+      "detail": "query endpoint"
+    },
+    {
+      "test": "remaining comes from response",
+      "pass": true,
+      "detail": "server remaining"
+    },
+    {
+      "test": "health available with page",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "body": "{\"status\":\"ok\"}"
+      }
+    }
+  ]
+}

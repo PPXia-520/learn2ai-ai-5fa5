@@ -1,0 +1,483 @@
+{
+  "generated_at": "2026-10-21T12:13:20+0800",
+  "executed_by": "python tests/verify_required_scenarios.py",
+  "passed": 9,
+  "failed": 0,
+  "results": [
+    {
+      "scenario": "S1 同名不同 student_id",
+      "expected": "两次 201 registered；数据库 2 条；同一姓名、不同 student_id",
+      "actual": {
+        "statuses": [
+          201,
+          201
+        ],
+        "results": [
+          "registered",
+          "registered"
+        ],
+        "remaining": [
+          99,
+          98
+        ],
+        "db_count": 2
+      },
+      "evidence": {
+        "db_rows": [
+          [
+            "S-SAME-NAME-1",
+            "同名同学"
+          ],
+          [
+            "S-SAME-NAME-2",
+            "同名同学"
+          ]
+        ]
+      },
+      "pass": true
+    },
+    {
+      "scenario": "S2 同一 student_id 改名再报",
+      "expected": "首次 201 registered；再次 409 already_registered；数据库仍 1 条；姓名和 created_at 不变",
+      "actual": {
+        "statuses": [
+          201,
+          409
+        ],
+        "second_result": "already_registered",
+        "returned_name": "原名同学",
+        "db_count": 1,
+        "stored_name": "原名同学",
+        "created_at_unchanged": true
+      },
+      "evidence": {
+        "before": [
+          "S-RENAME",
+          "原名同学",
+          "2026-10-21T04:12:30Z"
+        ],
+        "after": [
+          "S-RENAME",
+          "原名同学",
+          "2026-10-21T04:12:30Z"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "scenario": "S3 空白身份",
+      "expected": "6 个空白/首尾空白身份全部 400 invalid_student_id；数据库 0 条；剩余 100",
+      "actual": {
+        "responses": [
+          {
+            "student_id_repr": "''",
+            "status": 400,
+            "result": "invalid_student_id"
+          },
+          {
+            "student_id_repr": "'   '",
+            "status": 400,
+            "result": "invalid_student_id"
+          },
+          {
+            "student_id_repr": "'\\t'",
+            "status": 400,
+            "result": "invalid_student_id"
+          },
+          {
+            "student_id_repr": "'\\n'",
+            "status": 400,
+            "result": "invalid_student_id"
+          },
+          {
+            "student_id_repr": "' S1'",
+            "status": 400,
+            "result": "invalid_student_id"
+          },
+          {
+            "student_id_repr": "'S1 '",
+            "status": 400,
+            "result": "invalid_student_id"
+          }
+        ],
+        "db_count": 0,
+        "query_remaining": 100
+      },
+      "evidence": {
+        "db_rows": []
+      },
+      "pass": true
+    },
+    {
+      "scenario": "S4 第 1 轮 99+20 抢最后名额",
+      "expected": "99 条前置记录；20 个同时请求恰好 1 个 201 registered、19 个 409 full；最终 100 条；只有 1 个新身份成功",
+      "actual": {
+        "seed_failures": [],
+        "before_count": 99,
+        "status_counts": {
+          "201": 1,
+          "409": 19
+        },
+        "results": [
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "registered",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full"
+        ],
+        "elapsed_seconds": 0.224,
+        "after_count": 100,
+        "winner": "R01-RACE-08",
+        "race_rows": [
+          [
+            "R01-RACE-08",
+            "最后名额"
+          ]
+        ],
+        "query_remaining": 0
+      },
+      "evidence": {
+        "payload_ids": [
+          "R01-RACE-00",
+          "R01-RACE-01",
+          "R01-RACE-02",
+          "R01-RACE-03",
+          "R01-RACE-04",
+          "R01-RACE-05",
+          "R01-RACE-06",
+          "R01-RACE-07",
+          "R01-RACE-08",
+          "R01-RACE-09",
+          "R01-RACE-10",
+          "R01-RACE-11",
+          "R01-RACE-12",
+          "R01-RACE-13",
+          "R01-RACE-14",
+          "R01-RACE-15",
+          "R01-RACE-16",
+          "R01-RACE-17",
+          "R01-RACE-18",
+          "R01-RACE-19"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "scenario": "S4 第 2 轮 99+20 抢最后名额",
+      "expected": "99 条前置记录；20 个同时请求恰好 1 个 201 registered、19 个 409 full；最终 100 条；只有 1 个新身份成功",
+      "actual": {
+        "seed_failures": [],
+        "before_count": 99,
+        "status_counts": {
+          "201": 1,
+          "409": 19
+        },
+        "results": [
+          "full",
+          "full",
+          "registered",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full"
+        ],
+        "elapsed_seconds": 0.241,
+        "after_count": 100,
+        "winner": "R02-RACE-02",
+        "race_rows": [
+          [
+            "R02-RACE-02",
+            "最后名额"
+          ]
+        ],
+        "query_remaining": 0
+      },
+      "evidence": {
+        "payload_ids": [
+          "R02-RACE-00",
+          "R02-RACE-01",
+          "R02-RACE-02",
+          "R02-RACE-03",
+          "R02-RACE-04",
+          "R02-RACE-05",
+          "R02-RACE-06",
+          "R02-RACE-07",
+          "R02-RACE-08",
+          "R02-RACE-09",
+          "R02-RACE-10",
+          "R02-RACE-11",
+          "R02-RACE-12",
+          "R02-RACE-13",
+          "R02-RACE-14",
+          "R02-RACE-15",
+          "R02-RACE-16",
+          "R02-RACE-17",
+          "R02-RACE-18",
+          "R02-RACE-19"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "scenario": "S4 第 3 轮 99+20 抢最后名额",
+      "expected": "99 条前置记录；20 个同时请求恰好 1 个 201 registered、19 个 409 full；最终 100 条；只有 1 个新身份成功",
+      "actual": {
+        "seed_failures": [],
+        "before_count": 99,
+        "status_counts": {
+          "201": 1,
+          "409": 19
+        },
+        "results": [
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "registered"
+        ],
+        "elapsed_seconds": 0.198,
+        "after_count": 100,
+        "winner": "R03-RACE-19",
+        "race_rows": [
+          [
+            "R03-RACE-19",
+            "最后名额"
+          ]
+        ],
+        "query_remaining": 0
+      },
+      "evidence": {
+        "payload_ids": [
+          "R03-RACE-00",
+          "R03-RACE-01",
+          "R03-RACE-02",
+          "R03-RACE-03",
+          "R03-RACE-04",
+          "R03-RACE-05",
+          "R03-RACE-06",
+          "R03-RACE-07",
+          "R03-RACE-08",
+          "R03-RACE-09",
+          "R03-RACE-10",
+          "R03-RACE-11",
+          "R03-RACE-12",
+          "R03-RACE-13",
+          "R03-RACE-14",
+          "R03-RACE-15",
+          "R03-RACE-16",
+          "R03-RACE-17",
+          "R03-RACE-18",
+          "R03-RACE-19"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "scenario": "S4 第 4 轮 99+20 抢最后名额",
+      "expected": "99 条前置记录；20 个同时请求恰好 1 个 201 registered、19 个 409 full；最终 100 条；只有 1 个新身份成功",
+      "actual": {
+        "seed_failures": [],
+        "before_count": 99,
+        "status_counts": {
+          "201": 1,
+          "409": 19
+        },
+        "results": [
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "registered",
+          "full",
+          "full",
+          "full"
+        ],
+        "elapsed_seconds": 0.219,
+        "after_count": 100,
+        "winner": "R04-RACE-16",
+        "race_rows": [
+          [
+            "R04-RACE-16",
+            "最后名额"
+          ]
+        ],
+        "query_remaining": 0
+      },
+      "evidence": {
+        "payload_ids": [
+          "R04-RACE-00",
+          "R04-RACE-01",
+          "R04-RACE-02",
+          "R04-RACE-03",
+          "R04-RACE-04",
+          "R04-RACE-05",
+          "R04-RACE-06",
+          "R04-RACE-07",
+          "R04-RACE-08",
+          "R04-RACE-09",
+          "R04-RACE-10",
+          "R04-RACE-11",
+          "R04-RACE-12",
+          "R04-RACE-13",
+          "R04-RACE-14",
+          "R04-RACE-15",
+          "R04-RACE-16",
+          "R04-RACE-17",
+          "R04-RACE-18",
+          "R04-RACE-19"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "scenario": "S4 第 5 轮 99+20 抢最后名额",
+      "expected": "99 条前置记录；20 个同时请求恰好 1 个 201 registered、19 个 409 full；最终 100 条；只有 1 个新身份成功",
+      "actual": {
+        "seed_failures": [],
+        "before_count": 99,
+        "status_counts": {
+          "201": 1,
+          "409": 19
+        },
+        "results": [
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "full",
+          "registered",
+          "full",
+          "full",
+          "full",
+          "full"
+        ],
+        "elapsed_seconds": 0.232,
+        "after_count": 100,
+        "winner": "R05-RACE-15",
+        "race_rows": [
+          [
+            "R05-RACE-15",
+            "最后名额"
+          ]
+        ],
+        "query_remaining": 0
+      },
+      "evidence": {
+        "payload_ids": [
+          "R05-RACE-00",
+          "R05-RACE-01",
+          "R05-RACE-02",
+          "R05-RACE-03",
+          "R05-RACE-04",
+          "R05-RACE-05",
+          "R05-RACE-06",
+          "R05-RACE-07",
+          "R05-RACE-08",
+          "R05-RACE-09",
+          "R05-RACE-10",
+          "R05-RACE-11",
+          "R05-RACE-12",
+          "R05-RACE-13",
+          "R05-RACE-14",
+          "R05-RACE-15",
+          "R05-RACE-16",
+          "R05-RACE-17",
+          "R05-RACE-18",
+          "R05-RACE-19"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "scenario": "S5 服务重启后读取",
+      "expected": "重启后 GET 200 registered=true，姓名不变，remaining=99；数据库仍 1 条，created_at 不变",
+      "actual": {
+        "first_status": 201,
+        "get_status": 200,
+        "registered": true,
+        "name": "重启前姓名",
+        "remaining": 99,
+        "db_count": 1,
+        "created_at_unchanged": true
+      },
+      "evidence": {
+        "before": [
+          "S-RESTART",
+          "重启前姓名",
+          "2026-10-21T04:13:15Z"
+        ],
+        "after": [
+          "S-RESTART",
+          "重启前姓名",
+          "2026-10-21T04:13:15Z"
+        ]
+      },
+      "pass": true
+    }
+  ]
+}

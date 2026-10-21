@@ -1,0 +1,5 @@
+INFO:     127.0.0.1:63984 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64028 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64029 - "GET /static/styles.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64030 - "GET /static/app.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64031 - "GET /api/health HTTP/1.1" 200 OK

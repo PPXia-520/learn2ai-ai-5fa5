@@ -1,0 +1,563 @@
+{
+  "generated_at": "2026-10-21T11:36:47+0800",
+  "passed": 43,
+  "failed": 0,
+  "results": [
+    {
+      "test": "health endpoint",
+      "pass": true,
+      "detail": {
+        "status": "ok"
+      }
+    },
+    {
+      "test": "invalid input: missing student_id",
+      "pass": true,
+      "detail": {
+        "status": 400,
+        "body": {
+          "result": "invalid_student_id",
+          "message": "student_id 必须是非空字符串，且首尾不能有空白。"
+        }
+      }
+    },
+    {
+      "test": "invalid input: null student_id",
+      "pass": true,
+      "detail": {
+        "status": 400,
+        "body": {
+          "result": "invalid_student_id",
+          "message": "student_id 必须是非空字符串，且首尾不能有空白。"
+        }
+      }
+    },
+    {
+      "test": "invalid input: numeric student_id",
+      "pass": true,
+      "detail": {
+        "status": 400,
+        "body": {
+          "result": "invalid_student_id",
+          "message": "student_id 必须是非空字符串，且首尾不能有空白。"
+        }
+      }
+    },
+    {
+      "test": "invalid input: empty student_id",
+      "pass": true,
+      "detail": {
+        "status": 400,
+        "body": {
+          "result": "invalid_student_id",
+          "message": "student_id 必须是非空字符串，且首尾不能有空白。"
+        }
+      }
+    },
+    {
+      "test": "invalid input: spaces student_id",
+      "pass": true,
+      "detail": {
+        "status": 400,
+        "body": {
+          "result": "invalid_student_id",
+          "message": "student_id 必须是非空字符串，且首尾不能有空白。"
+        }
+      }
+    },
+    {
+      "test": "invalid input: leading space",
+      "pass": true,
+      "detail": {
+        "status": 400,
+        "body": {
+          "result": "invalid_student_id",
+          "message": "student_id 必须是非空字符串，且首尾不能有空白。"
+        }
+      }
+    },
+    {
+      "test": "invalid input: trailing space",
+      "pass": true,
+      "detail": {
+        "status": 400,
+        "body": {
+          "result": "invalid_student_id",
+          "message": "student_id 必须是非空字符串，且首尾不能有空白。"
+        }
+      }
+    },
+    {
+      "test": "invalid input: leading tab",
+      "pass": true,
+      "detail": {
+        "status": 400,
+        "body": {
+          "result": "invalid_student_id",
+          "message": "student_id 必须是非空字符串，且首尾不能有空白。"
+        }
+      }
+    },
+    {
+      "test": "invalid input: trailing newline",
+      "pass": true,
+      "detail": {
+        "status": 400,
+        "body": {
+          "result": "invalid_student_id",
+          "message": "student_id 必须是非空字符串，且首尾不能有空白。"
+        }
+      }
+    },
+    {
+      "test": "invalid input: whitespace name",
+      "pass": true,
+      "detail": {
+        "status": 400,
+        "body": {
+          "result": "invalid_name",
+          "message": "name 必须是非空字符串。"
+        }
+      }
+    },
+    {
+      "test": "invalid inputs did not write records",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "test": "first registration",
+      "pass": true,
+      "detail": {
+        "status": 201,
+        "body": {
+          "result": "registered",
+          "student_id": "S20260001",
+          "remaining": 99,
+          "name": "林同学"
+        }
+      }
+    },
+    {
+      "test": "same id does not overwrite name",
+      "pass": true,
+      "detail": {
+        "status": 409,
+        "body": {
+          "result": "already_registered",
+          "student_id": "S20260001",
+          "remaining": 99,
+          "name": "林同学"
+        }
+      }
+    },
+    {
+      "test": "same name different ids both register",
+      "pass": true,
+      "detail": {
+        "status": 201,
+        "body": {
+          "result": "registered",
+          "student_id": "S20260002",
+          "remaining": 98,
+          "name": "林同学"
+        }
+      }
+    },
+    {
+      "test": "internal whitespace allowed",
+      "pass": true,
+      "detail": {
+        "status": 201,
+        "body": {
+          "result": "registered",
+          "student_id": "S 2026",
+          "remaining": 97,
+          "name": "内部空白"
+        }
+      }
+    },
+    {
+      "test": "status query for registered student",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "body": {
+          "result": "already_registered",
+          "student_id": "S20260001",
+          "remaining": 97,
+          "name": "林同学",
+          "registered": true
+        }
+      }
+    },
+    {
+      "test": "status query for unknown student",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "body": {
+          "result": "not_registered",
+          "student_id": "S99999999",
+          "remaining": 97,
+          "registered": false
+        }
+      }
+    },
+    {
+      "test": "20 concurrent same-id requests create one record",
+      "pass": true,
+      "detail": [
+        201,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409
+      ]
+    },
+    {
+      "test": "same-id concurrency has one success",
+      "pass": true,
+      "detail": [
+        201,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409
+      ]
+    },
+    {
+      "test": "same-id concurrency has only business duplicate responses",
+      "pass": true,
+      "detail": [
+        201,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409
+      ]
+    },
+    {
+      "test": "busy after three attempts",
+      "pass": true,
+      "detail": {
+        "status": 503,
+        "body": {
+          "result": "busy",
+          "student_id": "S50000000",
+          "remaining": null
+        },
+        "elapsed": 0.485
+      }
+    },
+    {
+      "test": "busy does not write record",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "test": "registration succeeds after lock release",
+      "pass": true,
+      "detail": {
+        "status": 201,
+        "body": {
+          "result": "registered",
+          "student_id": "S50000000",
+          "remaining": 95,
+          "name": "忙碌测试"
+        }
+      }
+    },
+    {
+      "test": "database has 99 records before last-slot test",
+      "pass": true,
+      "detail": 99
+    },
+    {
+      "test": "20 new students at 99 create exactly one record",
+      "pass": true,
+      "detail": 100
+    },
+    {
+      "test": "last-slot concurrency has one success",
+      "pass": true,
+      "detail": [
+        409,
+        409,
+        201,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409
+      ]
+    },
+    {
+      "test": "last-slot concurrency has only full responses otherwise",
+      "pass": true,
+      "detail": [
+        {
+          "result": "full",
+          "student_id": "S40000000",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000001",
+          "remaining": 0
+        },
+        {
+          "result": "registered",
+          "student_id": "S40000002",
+          "remaining": 0,
+          "name": "最后名额"
+        },
+        {
+          "result": "full",
+          "student_id": "S40000003",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000004",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000005",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000006",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000007",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000008",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000009",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000010",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000011",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000012",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000013",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000014",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000015",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000016",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000017",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000018",
+          "remaining": 0
+        },
+        {
+          "result": "full",
+          "student_id": "S40000019",
+          "remaining": 0
+        }
+      ]
+    },
+    {
+      "test": "full new student",
+      "pass": true,
+      "detail": {
+        "status": 409,
+        "body": {
+          "result": "full",
+          "student_id": "S60000000",
+          "remaining": 0
+        }
+      }
+    },
+    {
+      "test": "duplicate wins over full",
+      "pass": true,
+      "detail": {
+        "status": 409,
+        "body": {
+          "result": "already_registered",
+          "student_id": "S20260001",
+          "remaining": 0,
+          "name": "林同学"
+        }
+      }
+    },
+    {
+      "test": "records persist after restart",
+      "pass": true,
+      "detail": {
+        "status": 200,
+        "body": {
+          "result": "already_registered",
+          "student_id": "S20260001",
+          "remaining": 0,
+          "name": "林同学",
+          "registered": true
+        }
+      }
+    },
+    {
+      "test": "schema has no prohibited contact fields",
+      "pass": true,
+      "detail": [
+        "created_at",
+        "name",
+        "student_id"
+      ]
+    },
+    {
+      "test": "database rejects student_id: null",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "test": "database rejects student_id: empty",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "test": "database rejects student_id: spaces",
+      "pass": true,
+      "detail": "   "
+    },
+    {
+      "test": "database rejects student_id: leading space",
+      "pass": true,
+      "detail": " S1"
+    },
+    {
+      "test": "database rejects student_id: trailing space",
+      "pass": true,
+      "detail": "S1 "
+    },
+    {
+      "test": "database rejects student_id: leading tab",
+      "pass": true,
+      "detail": "\tS1"
+    },
+    {
+      "test": "database rejects student_id: trailing newline",
+      "pass": true,
+      "detail": "S1\n"
+    },
+    {
+      "test": "database rejects student_id: leading ideographic space",
+      "pass": true,
+      "detail": "　S1"
+    },
+    {
+      "test": "database rejects whitespace-only name",
+      "pass": true,
+      "detail": "name"
+    },
+    {
+      "test": "database allows internal whitespace",
+      "pass": true,
+      "detail": "S SCHEMA"
+    },
+    {
+      "test": "database rejects duplicate student_id",
+      "pass": true,
+      "detail": "S-SCHEMA-2"
+    }
+  ]
+}

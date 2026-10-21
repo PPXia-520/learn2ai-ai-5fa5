@@ -1,0 +1,11 @@
+{
+  "url": "http://127.0.0.1:8000/",
+  "html_status": 200,
+  "has_title": true,
+  "screenshot": "G:\\Learn2ai\\build\\remote\\instances\\teacher\\courses\\全栈开发：AI 协作项目单元-1e83d985\\work\\e3a4f2f2-2a7b-45f2-96a3-0ebc092ad391\\50b7cb48-b39b-4da1-aeef-3eb35f66bb51\\verification\\page-8000.png",
+  "screenshot_exists": true,
+  "screenshot_bytes": 428407,
+  "chrome_returncode": 0,
+  "chrome_stdout": "",
+  "chrome_stderr": "[21512:22848:1021/113939.734:ERROR:chrome\\browser\\extensions\\external_registry_loader_win.cc:147] Missing value path for key Software\\Google\\Chrome\\Extensions\\dngcpimnedloihjnnfngkgjoidhnaolf.\n[21512:22848:1021/113939.734:ERROR:chrome\\browser\\extensions\\external_registry_loader_win.cc:147] Missing value path for key Software\\Google\\Chrome\\Extensions\\fcoeoabgfenejglbffodgkkbkcdhcgfn.\n428407 bytes written to file G:\\Learn2ai\\build\\remote\\instances\\teacher\\courses\\全栈开发：AI 协作项目单元-1e83d985\\work\\e3a4f2f2-2a7b-45f2-96a3-0ebc092ad391\\50b7cb48-b39b-4da1-aeef-3eb35f66bb51\\verification\\page-8000.png\n"
+}

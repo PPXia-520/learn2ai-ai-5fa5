@@ -1,0 +1,14 @@
+
+# learn2ai local credentials and transcripts
+.env
+.env.*
+!.env.example
+.codex/
+.claude/
+.orgii/
+.learn2ai-test/
+node_modules/
+auth.json
+credentials.json
+*.pem
+*.key
